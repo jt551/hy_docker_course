@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+    back:
+        image: jtwa551/dockerhy_part1_backend:latest
+        environment:
+            - FRONT_URL=http://localhost:5000
+            - REDIS=redis
+            - REDIS_PORT=6379
+        ports: 
+            - 8000:8000
+        volumes: 
+            - ./logs.txt:/backend-example-docker-master/logs.txt
+        container_name: B9000
+    front:
+        image: jtwa551/dockerhy_part1_frontend
+        environment: 
+            - API_URL=http://localhost:8000
+        ports:
+            - 5000:5000
+        container_name: F9000
+    redis:
+        image: redis
